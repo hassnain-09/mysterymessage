@@ -13,34 +13,34 @@ interface OtpEmailProps {
   otp?: string
 }
 
-export const OtpVerificationEmail = ({ username, otp }: OtpEmailProps) => (
-  <Html>
-    <Head />
-    <Body style={main}>
-      <Container style={container}>
-        <Text style={tertiary}>Verify Your Identity</Text>
+export default function OtpVerificationEmail({ username, otp }: OtpEmailProps) {
+  return (
+    <Html>
+      <Head />
+      <Body style={main}>
+        <Container style={container}>
+          <Text style={tertiary}>Verify Your Identity</Text>
 
-        <Heading style={secondary}>Hi {username || "User"},</Heading>
-        <Text style={paragraph}>
-          Please enter the following code to verify your account.
-        </Text>
+          <Heading style={secondary}>Hi {username || "User"},</Heading>
+          <Text style={paragraph}>
+            Please enter the following code to verify your account.
+          </Text>
 
-        <Section style={codeContainer}>
-          <Text style={code}>{otp}</Text>
-        </Section>
+          <Section style={codeContainer}>
+            <Text style={code}>{otp}</Text>
+          </Section>
 
-        <Text style={paragraph}>
-          If you did not request this verification, you can safely ignore this
-          email.
-        </Text>
-      </Container>
+          <Text style={paragraph}>
+            If you did not request this verification, you can safely ignore this
+            email.
+          </Text>
+        </Container>
 
-      <Text style={footer}>Securely powered by MysteryMessage</Text>
-    </Body>
-  </Html>
-)
-
-export default OtpVerificationEmail
+        <Text style={footer}>Securely powered by MysteryMessage</Text>
+      </Body>
+    </Html>
+  )
+}
 
 const main = {
   backgroundColor: "#ffffff",

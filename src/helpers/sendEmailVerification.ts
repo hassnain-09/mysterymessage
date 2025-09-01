@@ -1,6 +1,6 @@
 import { ApiResponse } from "@/types/ApiResponse"
 import { resend } from "@/lib/resend"
-import OtpVerificationEmail from "../../emails/VerificationEmail"
+import OtpVerificationEmail from "../../emails/OtpVerificationEmail"
 
 export async function sendVerificationEmail(
   email: string,
@@ -11,11 +11,16 @@ export async function sendVerificationEmail(
     await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: email,
-      subject: "Mystry Message Verification Code",
-      react: OtpVerificationEmail({ username: username, otp: verifyCode }),
+      subject: "Mystery Message Verification",
+      react: OtpVerificationEmail({ username, otp: verifyCode }),
     })
+
     return { success: true, message: "Verification email sent successfully" }
-  } catch (error) {
-    return { success: false, message: "Failed to send verification email" }
+  } catch (error: any) {
+    console.error("Email sending error:", error)
+    return {
+      success: false,
+      message: `Failed to send verification email: ${error.message || error}`,
+    }
   }
 }
